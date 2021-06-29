@@ -13,12 +13,12 @@ MummyIsland is a 3D game, Written in Python using Pyopengl and Pygame.
  6. Enjoy the game!
  
 ## How to play
-WASD controlls
-space for jumping
-shift for running
-f1 to start/stop recording
-f2 to replay a record
-esc to exit game
+ - WASD controlls
+ - space for jumping
+ - shift for running
+ - f1 to start/stop recording
+ - f2 to replay a record
+ - esc to exit game
 
 ## Cheat Codes
 
