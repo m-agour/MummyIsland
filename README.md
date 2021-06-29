@@ -9,7 +9,7 @@ MummyIsland is a 3D game, Written in Python using Pyopengl and Pygame.
  2. install Pyopengl and Pygame  
  3. open cmd
  4. `cd <main-directory>  `
- 5. `python glut2.py `
+ 5. `python game.py `
  6. Enjoy the game!
  
 ## How to play
