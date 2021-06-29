@@ -2,7 +2,7 @@
   
 MummyIsland is a 3D game, Written in Python using Pyopengl and Pygame.  
   
-  ![image](https://user-images.githubusercontent.com/63170874/123765212-d34b0c80-d8c5-11eb-9761-7a248237ad48.png)
+![image](https://user-images.githubusercontent.com/63170874/123775274-86b7ff00-d8ce-11eb-8f7d-8ac9ea3905df.png)
 
 
 ## How to run
