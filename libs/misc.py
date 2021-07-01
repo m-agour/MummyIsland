@@ -8,6 +8,7 @@ from libs.font import *
 from libs.vector import *
 from libs.settings import *
 
+
 class ShotTrace:
     tex = loadTexture("assets/textures/ground/gnd.png", alpha=True)
 
@@ -95,6 +96,7 @@ class Misc:
 
 fnt = Font("assets/font/MUMMY.png", "assets/font/MUMMY.fnt")
 point = loadTexture("assets/textures/onscreen/crosshair_default.png", alpha=True)
+bloodOnScreen = loadTexture("assets/textures/onscreen/BloodyScreen.png", alpha=True)
 scoreBoard = loadTexture("assets/textures/onscreen/ammo_bg.png", alpha=True)
 heart = loadTexture("assets/textures/onscreen/heart.png", alpha=True)
 bloodBar = loadTexture("assets/textures/onscreen/bloodBar.jpg", alpha=True)
@@ -113,6 +115,7 @@ def drawRect(w=ratio, h=1.0):
     glVertex2d( w / ratio, -h)
     glEnd()
 
+
 def draw_health_bar(health):
     # health bar
     glEnable(GL_BLEND)
@@ -125,6 +128,8 @@ def draw_health_bar(health):
     glColor4f(1, 1, 1, 0.3)
     drawRect(0.5, 0.0307)
     glDisable(GL_BLEND)
+
+
 def drawHorizontalRect(w=ratio, h=1.0):
     glBegin(GL_QUADS)
     glTexCoord2f(1, 1)
@@ -136,6 +141,7 @@ def drawHorizontalRect(w=ratio, h=1.0):
     glTexCoord2f(1, 0)
     glVertex3f( w / ratio, 0, -h)
     glEnd()
+
 
 def drawRectBounded(x1, x2, h, texX2):
     glBegin(GL_QUADS)
@@ -167,36 +173,49 @@ def drawOnScreen(game, x, y, z):
         # color = glReadPixels(0, 0, 1, 1, GL_RGB, GL_FLOAT)[0][0]
         # brightness = (299 * R + 587 * G + 114 * B) / 1000
         # c = 1 - sum(color)/3
-        glMatrixMode(GL_PROJECTION)
-        glPushMatrix()
-        glLoadIdentity()
 
         glEnable(GL_BLEND)
+        glDepthFunc(GL_ALWAYS)
+        glMatrixMode(GL_PROJECTION)
+        glPushMatrix()
+
+        # lives (hearts)
+        glLoadIdentity()
+        glColor(0.8, 0.8, 0.8, 1)
+        glTranslate(-0.9, 0.9, 0)
+        glBindTexture(GL_TEXTURE_2D, heart)
+        for i in range(game.player.lives):
+            drawRect(0.05, 0.05)
+            glTranslate(0.06, 0, 0)
+
+        # cursor
+        glLoadIdentity()
         # c = 0.7, 0.0, 0.0
         c = 1, 1, 1
         glColor(*c, 1)
         glBindTexture(GL_TEXTURE_2D, point)
         glScale(0.27, 0.27, 0.27)
         drawRect(0.1, 0.1)
-        glDisable(GL_BLEND)
 
+        # health bar
         glLoadIdentity()
         health = game.player.health
         glTranslate(0, 0.91, 0)
         draw_health_bar(health/100)
-
-        glLoadIdentity()
-        glColor(0.8, 0.8, 0.8, 1)
-        glTranslate(-0.9, 0.9, 0)
-        for i in range(game.player.lives):
-            # print(game.player.lives)
-            glEnable(GL_BLEND)
-            glBindTexture(GL_TEXTURE_2D, heart)
-            drawRect(0.05, 0.05)
-            glDisable(GL_BLEND)
-            glTranslate(0.06, 0, 0)
         glPopMatrix()
 
+        # onscreen blood
+        glEnable(GL_BLEND)
+        glPushMatrix()
+        glLoadIdentity()
+
+        glColor(1, 1, 1, (1-health/100)*abs(sin(glutGet(GLUT_ELAPSED_TIME)/500))+(1-health/100))
+        glBindTexture(GL_TEXTURE_2D, bloodOnScreen)
+        drawRect(ratio, 1)
+        glDisable(GL_BLEND)
+        glPopMatrix()
+
+        # muzzle
         glMatrixMode(GL_MODELVIEW)
         if game.player.gun.muzzle.playing:
             glEnable(GL_BLEND)
@@ -214,7 +233,6 @@ def drawOnScreen(game, x, y, z):
             glPopMatrix()
             glMatrixMode(GL_MODELVIEW)
             glDisable(GL_BLEND)
-
     # score
     ammo = game.player.gun.ammo # if game.player.gun.ammo != inf else chr(8734)
 
@@ -222,7 +240,7 @@ def drawOnScreen(game, x, y, z):
     drawText("{}".format(game.player.gun.loadedBullets).upper(), 0.875, -0.9, ratio, color, 2.5)
     drawText("{}".format(ammo).upper(), 0.93, -0.865, ratio, color, 1.5)
 
-    # lives
+    # score
     glLoadIdentity()
     glTranslate(0, 0, 0)
     drawText("{}".format(int(game.player.kills)).upper(), 0.83, 0.86, ratio, (0.8, 0, 0, 1), 1.7)
@@ -233,6 +251,7 @@ def drawOnScreen(game, x, y, z):
 
     glMatrixMode(GL_MODELVIEW)
     glPopMatrix()
+    glDepthFunc(GL_LESS)
 
 
 

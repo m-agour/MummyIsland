@@ -23,11 +23,7 @@ class Game:
     initSave = []
     player = Player(terrain)
     sky = Skybox(player.camera, "assets/textures/skybox/skybox1day/")
-    # building = OBJ("assets/buildings/industry/lowpoly_building_industry.obj")
-    # building = OBJ("assets/trees/Apple_Tree_2_Object.obj")
-    # gun = OBJ("assets/obj/weapons/gun.obj")rr
-    # pyramid = OBJ("assets/obj/king/Tutankhamun King Low Poly.obj", pos=(21, terrain.getHeight(21, 21), 21))
-
+    
     x, y, z, p, d = 0, 0, 0, 0, 0
     Enemy.health = 120
     enemies = []
@@ -41,7 +37,6 @@ class Game:
     enemyTexture = loadTexture("assets/textures/other/metal.jpg")
     enemyDyingSound = SoundSeries("assets/sounds/enemy", 17, 0.6, True)
     cheatSound = Sound("assets/sounds/player/allhail.ogg")
-    wicked = Sound("assets/sounds/player/wicked.ogg")
 
 
 
@@ -50,44 +45,12 @@ class Game:
     horror.set_volume(0.3)
     horror.play(-1)
 
-    # # LAVA SHADER
-    # lava = Shader('shaders/new.vert', 'shaders/new.frag')
-    # lava.use()
-    # lava.setVec3('lightPos', glm.vec3(1922, 3354, 3391))
-    # scale = glm.scale(glm.mat4(1), glm.vec3(0.03, 0.03, 0.03))
-    # scale = glm.rotate(scale, radians(90), glm.vec3(0, 0, 1))
-    # scale = glm.rotate(scale, radians(90), glm.vec3(0, 1, 0))
-    # scale = glm.rotate(scale, radians(45), glm.vec3(0, 0, -1))
-    # lava.setMat4('model', scale)
-    # # Creating Texture
-    # texture = glGenTextures(1)
-    # glBindTexture(GL_TEXTURE_2D, texture)
-    # # texture wrapping params
-    # glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT)
-    # glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT)
-    # # texture filtering params
-    # glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
-    # glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
-    #
-    # noiseWidth = 512
-    # SHAPE = (noiseWidth, noiseWidth)
-    #
-    # noise = np.random.normal(255. / 2, 255. / 20, SHAPE)
-    # image = Image.fromarray(noise)
-    # image = image.convert('RGB')
-    # img_data = np.array(list(image.getdata()), np.uint8)
-    # glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, noiseWidth, noiseWidth, 0, GL_RGB, GL_UNSIGNED_BYTE, img_data)
-    #
-    # lava.unuse()
 
 
 
     playerRect = pygame.Rect(0, 0, 0, 0)
-    # print(pyramid.vertices)ww
-    # pyRect = pygame.Rect()
+    
     for i in range(10):
-        # enemies.append(Enemy(player, enemyTexture, enemyDyingSound, (33, terrain.getHeight(33, 33), 33)))
-        # enemies.append(Enemy(player, enemyTexture, enemyDyingSound, (66, terrain.getHeight(66, 66), 66)))
         enemies.append(Enemy(player, enemyTexture, enemyDyingSound, terrain.getRandomPlace()))
     for i in range(10):
         trophies.append(Ammo("assets/AMMO.obj", terrain.getRandomPlace(0.05)))
@@ -105,7 +68,6 @@ class Game:
 
     def loadGame(self):
         loadAll(self, self.initSave)
-
 
     def cheatCodes(self):
         lastEightChars = "".join(self.lastEightChars)
@@ -151,9 +113,7 @@ class Game:
                 i.animation["death"].animate()
             self._afterCheat("All Enemies are killed")
 
-        if lastEightChars[8 - 6:] == "wicked":
-            self.wicked.play()
-            self._afterCheat("fuck off wicked")
+
 
 
 
@@ -213,45 +173,9 @@ class Game:
             elif not self.player.left and self.player.right:
                 if center[0] + width + r > player.x > center[0] - width - r and center[2] + width + r > player.z > center[2] - width - r:
                     self.player.camera.cam_pos += (norm + ((temp ** norm) - dir)).normalize() * self.player.currentSpeed
-        # glPushMatrix()
-        # glTranslate(35.5, self.terrain.getHeight(35.5, 35.5), 35.5)
-        # glScale(1, 1, 1)
-        # player = self.player.camera.cam_pos
-        # center = (35.5, 0, 35.5)
-        # glutSolidCube(3)
-        # glPopMatrix()
-        # dir = self.player.camera.cam_fr
-        # r = 0.15
-        # if center[0] + 1.5 + r > player.x > center[0] - 1.5 - r and center[2] + 1.5 + r > player.z > center[
-        #     2] - 1.5 - r:
-        #
-        #     norm = self.player.camera.cam_pos - Vec3(center[0], 0, center[2])
-        #     if abs(norm.x) > abs(norm.z):
-        #         if norm.x > 0:
-        #             norm = Vec3(1, 0, 0)
-        #         else:
-        #             norm = Vec3(-1, 0, 0)
-        #     else:
-        #         if norm.z > 0:
-        #             norm = Vec3(0, 0, 1)
-        #         else:
-        #             norm = Vec3(0, 0, -1)
-        #
-        #     temp = norm ** dir
-        #     self.player.camera.cam_pos -= dir * self.player.currentSpeed
-        #     self.player.camera.cam_pos += (temp ** norm).normalize() * self.player.currentSpeed
-        #
-        #     if self.player.left and not self.player.right:
-        #         if center[0] + 1.5 + r > player.x > center[0] - 1.5 - r and center[2] + 1.5 + r > player.z > center[
-        #             2] - 1.5 - r:
-        #             self.player.camera.cam_pos += (norm + ((temp ** norm) - dir)).normalize() * self.player.currentSpeed
-        #
-        #     elif not self.player.left and self.player.right:
-        #         if center[0] + 1.5 + r > player.x > center[0] - 1.5 - r and center[2] + 1.5 + r > player.z > center[
-        #             2] - 1.5 - r:
-        #             self.player.camera.cam_pos += (norm + ((temp ** norm) - dir)).normalize() * self.player.currentSpeed
+  
 
-        # ctrl+s to save
+        # f1 to save
         if self.modifiers['F1']:
             self.saveGame()
             self.firstFrame = False
@@ -264,13 +188,6 @@ class Game:
 
 
         glMatrixMode(GL_MODELVIEW)
-        # glPushMatrix()
-        # POS = self.pyramid.pos
-        # glTranslate(POS[0], POS[1] - 1, POS[2])
-        # # glScale(4, 4.7, 4)
-        # glCallList(self.pyramid.gl_list)
-        # glPopMatrix()
-
         glPushMatrix()
         glTranslate(0, self.terrain.getSeaLevel(), 0)
         glEnable(GL_TEXTURE_2D)
@@ -313,10 +230,7 @@ class Game:
         glCallList(self.terrain.gl_list)
         glEnable(GL_TEXTURE_2D)
         glTranslate(32.0, self.player.terrain.interpolateHeight(32, 32), 32.0)
-        # glCallList(self.building.gl_list)
-        # glCallList(self.model.next_frame())
         glPopMatrix()
-        # glDisable(GL_FOG)
         
         glPushMatrix()
         self.player.loop()
@@ -331,8 +245,6 @@ class Game:
         rd = self.player.gun.shootingDir
         rp = self.player.camera.cam_pos
         if self.player.gun.shooting:
-            # for i in range(len(self.terrain.planeNormals)):
-            #     for j in range(len(self.terrain.planeNormals)):
             done = False
             for i in range(int(rp.x)-6, int(rp.x)+6):
                 for j in range(int(rp.z)-6, int(rp.z)+6):
