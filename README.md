@@ -39,10 +39,10 @@ MummyIsland is a 3D game, Written in Python using Pyopengl and Pygame.
 | reset | removes all applied cheats |
 
 ## Gameplay
-latest version
-https://youtu.be/myg0ISQryD8
-previous version
-https://youtu.be/TgGBlhRgckA
+latest version<br/>
+https://youtu.be/myg0ISQryD8<br/>
+previous version<br/>
+https://youtu.be/TgGBlhRgckA<br/>
 
 ## For Devs
 To add animations to the game follow these steps
@@ -54,8 +54,8 @@ To add animations to the game follow these steps
  4. Now you should have 3 files: "something.pak", "texture.tan" and the texture image (if exists).
 
 
- - why not just use th obj sequence animation directly?
+ - why not just use th obj sequence animation directly?<br/>
 Because they will consume a lot of space, slower to load and the same texture will be loaded into memory multiple of times. 
 
- - why not use the collada format (.DAE)?
+ - why not use the collada format (.DAE)?<br/>
 	Since the game is made using an old version of OpenGL (glBegin/glEnd), the default vertex shader cannot be modified to calculate the animation using transformation matrix of each vertex, and hence the best option is to precalculate thousands of sequential matrix multiplications by the CPU for each frame and store them in memory which will result in the same memory usage as the obj sequence.
