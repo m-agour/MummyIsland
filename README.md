@@ -51,7 +51,7 @@ To add animations to the game follow these steps
  2. Use obj.py to convert from obj sequence to single animation json file by changing 'path' string variable to the animation's folder.
  note: all obj/mtl files will be deleted and two files will be created instead.
  3. Compress the resulting "Animation" file to a "ZIP" format, and rename the compressed file to "something.pak".
- 4. Now you should have 3 files: "something.pak", "texture.tan" and the texture image (if exists).
+ 4. Now you should have 3 files: "something.pak", "textures.tan" and the texture image (if exists).
  5. load the frames using loadPack(pak_file) which returns a list of frames then use it to make Animation(list_of_frames). 
 
 
