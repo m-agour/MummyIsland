@@ -39,10 +39,10 @@ MummyIsland is a 3D game, Written in Python using Pyopengl and Pygame.
 | reset | removes all applied cheats |
 
 ## Gameplay
-latest version<br/>
-https://youtu.be/myg0ISQryD8<br/>
-previous version<br/>
-https://youtu.be/TgGBlhRgckA<br/>
+latest version
+https://youtu.be/myg0ISQryD8
+previous version
+https://youtu.be/TgGBlhRgckA
 
 ## For Devs
 To add animations to the game follow these steps
@@ -52,6 +52,7 @@ To add animations to the game follow these steps
  note: all obj/mtl files will be deleted and two files will be created instead.
  3. Compress the resulting "Animation" file to a "ZIP" format, and rename the compressed file to "something.pak".
  4. Now you should have 3 files: "something.pak", "texture.tan" and the texture image (if exists).
+ 5. load the frames using loadPack(pak_file) which returns a list of frames then use it to make Animation(list_of_frames). 
 
 
  - why not just use th obj sequence animation directly?<br/>
