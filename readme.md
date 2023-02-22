@@ -32,7 +32,8 @@ MummyIsland is a 3D game, Written in Python using Pyopengl and Pygame.
 | massacre | kill all the mummies |
 | hackmag | infinity number of bullets loaded into mag |
 | maxa | infinity reloads |
-| rocket | no gravity |
+| rocket | no gravity
+fares
 | flash | speed boost |
 | neverdie | infinity health |
 | slamdunk | high jump |
